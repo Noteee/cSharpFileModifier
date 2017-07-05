@@ -7,10 +7,17 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
+using System.Security;
+using System.Runtime.InteropServices;
+using System.Security.AccessControl;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
+using Microsoft.Win32.SafeHandles;
 
 namespace SanityArchiver
 {
@@ -20,6 +27,8 @@ namespace SanityArchiver
             selectedFilePath,
             compressedDestinationPath,
             destinationPath,
+            encryptDestination,
+            decryptDestination,
             decompressDestinationPath;
 
 
@@ -31,6 +40,8 @@ namespace SanityArchiver
             {
                 string destinationPath = fbd.SelectedPath + "\\" + this.selectedFileName;
                 this.destinationPath = destinationPath;
+                this.encryptDestination = fbd.SelectedPath + "\\encrypted" + this.selectedFileName;
+                this.decryptDestination = fbd.SelectedPath + "\\un" + this.selectedFileName;
                 textBox2.Text = destinationPath;
                 if (File.Exists(selectedFilePath))
                 {
@@ -157,6 +168,104 @@ namespace SanityArchiver
             MessageBox.Show("Compress Success!");
         }
 
+        private void pictureBox7_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (File.Exists(selectedFilePath))
+            {
+                //File.Encrypt(selectedFilePath);
+                Encrypt(selectedFilePath, encryptDestination);
+            }
+        }
+
+        private void pictureBox8_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (File.Exists(selectedFilePath))
+            {
+                if (!File.Exists(destinationPath))
+                    Decrypt(selectedFilePath, decryptDestination);
+                MessageBox.Show("Decrypt complete!");
+            }
+        }
+
+        private void pictureBox10_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (File.Exists(selectedFilePath))
+            {
+                File.SetAttributes(selectedFilePath, FileAttributes.ReadOnly);
+                MessageBox.Show("File is read only!");
+            }
+        }
+
+        private void pictureBox11_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (File.Exists(selectedFilePath))
+            {
+                string file = selectedFilePath;
+                FileAttributes attrs = File.GetAttributes(file);
+                if (attrs.HasFlag(FileAttributes.ReadOnly))
+                {
+                    File.SetAttributes(file, attrs & ~FileAttributes.ReadOnly);
+                    MessageBox.Show("ReadOnly removed!");
+                }
+            }
+        }
+
+        private void Decrypt(string inputFilePath, string outputfilePath)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey,
+                    new byte[] {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76});
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (FileStream fsInput = new FileStream(inputFilePath, FileMode.Open))
+                {
+                    using (CryptoStream cs =
+                        new CryptoStream(fsInput, encryptor.CreateDecryptor(), CryptoStreamMode.Read))
+                    {
+                        using (FileStream fsOutput = new FileStream(outputfilePath, FileMode.Create))
+                        {
+                            int data;
+                            while ((data = cs.ReadByte()) != -1)
+                            {
+                                fsOutput.WriteByte((byte) data);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Encrypt(string inputFilePath, string outputfilePath)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey,
+                    new byte[] {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76});
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (FileStream fsOutput = new FileStream(outputfilePath, FileMode.Create))
+                {
+                    using (CryptoStream cs =
+                        new CryptoStream(fsOutput, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        using (FileStream fsInput = new FileStream(inputFilePath, FileMode.Open))
+                        {
+                            int data;
+                            while ((data = fsInput.ReadByte()) != -1)
+                            {
+                                cs.WriteByte((byte) data);
+                            }
+                        }
+                    }
+                }
+                MessageBox.Show("Encrypt complete");
+            }
+        }
+
+
         private void pictureBox6_MouseClick(object sender, MouseEventArgs e)
         {
             if (destinationPath != null)
@@ -175,7 +284,6 @@ namespace SanityArchiver
                     {
                         File.Delete(decompressedDestination);
                         doDecompress();
-
                     }
             }
         }
