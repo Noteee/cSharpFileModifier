@@ -1,23 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
-using System.Security;
-using System.Runtime.InteropServices;
-using System.Security.AccessControl;
-using System.Security.Cryptography;
-using System.Text.RegularExpressions;
-using Microsoft.Win32.SafeHandles;
+
 
 namespace SanityArchiver
 {
@@ -32,7 +21,7 @@ namespace SanityArchiver
             decompressDestinationPath;
 
 
-        private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
+        private void destinationPathBrowserButton_MouseClick(object sender, MouseEventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult dr = fbd.ShowDialog();
@@ -43,6 +32,7 @@ namespace SanityArchiver
                 this.encryptDestination = fbd.SelectedPath + "\\encrypted" + this.selectedFileName;
                 this.decryptDestination = fbd.SelectedPath + "\\un" + this.selectedFileName;
                 textBox2.Text = destinationPath;
+
                 if (File.Exists(selectedFilePath))
                 {
                     pictureBox14.Visible = true;
@@ -50,36 +40,44 @@ namespace SanityArchiver
             }
         }
 
-        private void fileCopyWithDialog(string sourcePath, string destinationPath, string message)
+        void directoryInfo()
         {
-            sourcePath = selectedFilePath;
-            destinationPath = this.destinationPath;
-            FileSystem.CopyFile(sourcePath, destinationPath,
-                UIOption.AllDialogs);
-            if (File.Exists(destinationPath))
-                MessageBox.Show(message);
+            try
+            {
+                DriveInfo[] myDrives = DriveInfo.GetDrives();
+                Int64 freeSpaceC = Convert.ToInt64(myDrives[0].TotalFreeSpace) / 1024 / 1024 / 1024;
+                Int64 freeSpaceF = Convert.ToInt64(myDrives[2].TotalFreeSpace) / 1024 / 1024 / 1024;
+
+                textBox3.AppendText(myDrives[0].Name + "-->" + freeSpaceC.ToString() + "Gb FreeSpace remaining");
+                textBox3.AppendText("\n");
+                textBox3.AppendText(myDrives[2].Name + "-->" + freeSpaceF.ToString() + "Gb FreeSpace remaining");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        private void pictureBox3_MouseClick(object sender, MouseEventArgs e)
+        private void fileCopyButton_MouseClick(object sender, MouseEventArgs e)
         {
+            FileCopyClass fileCopy = new FileCopyClass();
             if (textBox1.Text != null && textBox2.Text != null && textBox1.Text == selectedFileName &&
                 textBox2.Text == destinationPath)
             {
                 if (File.Exists(destinationPath))
                 {
                     File.Delete(destinationPath);
-                    fileCopyWithDialog(selectedFilePath, destinationPath, "Copy Success!");
+                    fileCopy.fileSenderWDialog(selectedFilePath, destinationPath);
                 }
 
                 else
                 {
-                    fileCopyWithDialog(selectedFilePath, destinationPath, "Copy Success!");
+                    fileCopy.fileSenderWDialog(selectedFilePath, destinationPath);
                 }
             }
         }
 
-
-        private void pictureBox9_MouseClick(object sender, MouseEventArgs e)
+        private void deleteFileButton_MouseClick(object sender, MouseEventArgs e)
         {
             if (File.Exists(selectedFilePath))
             {
@@ -89,105 +87,69 @@ namespace SanityArchiver
             }
         }
 
-        private void pictureBox5_MouseClick(object sender, MouseEventArgs e)
+        private void fileMoveButton_MouseClick(object sender, MouseEventArgs e)
         {
+            FileMoveClass fileMove = new FileMoveClass();
             if (textBox1.Text != null && textBox2.Text != null && textBox1.Text == selectedFileName &&
                 textBox2.Text == destinationPath)
             {
                 if (File.Exists(destinationPath))
                 {
                     File.Delete(destinationPath);
-                    fileCopyWithDialog(selectedFilePath, destinationPath, "Move Success!");
-                    FileSystem.DeleteFile(selectedFilePath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                    fileMove.fileSenderWDialog(selectedFilePath, destinationPath);
                 }
 
                 else
                 {
-                    fileCopyWithDialog(selectedFilePath, destinationPath, "Move Success!");
-                    FileSystem.DeleteFile(selectedFilePath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                    fileMove.fileSenderWDialog(selectedFilePath, destinationPath);
                 }
             }
         }
 
-        private void pictureBox12_MouseClick(object sender, MouseEventArgs e)
+        private void openFileButton_MouseClick(object sender, MouseEventArgs e)
         {
             if (textBox1.Text != null && textBox1.Text == selectedFileName)
                 Process.Start(selectedFilePath);
         }
 
-        private void pictureBox4_MouseClick(object sender, MouseEventArgs e)
+        private void fileCompressButton_MouseClick(object sender, MouseEventArgs e)
         {
+            CompressClass compress = new CompressClass();
             if (!File.Exists(compressedDestinationPath) && textBox2.Text != null && textBox2.Text == destinationPath &&
                 textBox1.Text != null && textBox1.Text == selectedFileName)
             {
-                doCompress();
+                compress.doCompression(selectedFilePath, destinationPath);
             }
             else
             {
                 if (File.Exists(compressedDestinationPath))
                 {
                     File.Delete(compressedDestinationPath);
-                    doCompress();
+                    compress.doCompression(selectedFilePath, destinationPath);
                 }
             }
         }
 
-        void doDecompress()
-        {
-            var token = destinationPath.ToList();
-            string decompressedDestination = "";
-            for (int i = 0; i < token.Count - 3; i++)
-            {
-                decompressedDestination += token[i];
-            }
-
-            using (FileStream fs = File.OpenRead(selectedFilePath))
-            using (FileStream fw = File.Create(decompressedDestination))
-
-            using (GZipStream zipStream = new GZipStream(fs, CompressionMode.Decompress, false))
-            {
-                byte[] buffer = new byte[1024];
-                int nRead;
-                while ((nRead = zipStream.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    fw.Write(buffer, 0, nRead);
-                }
-            }
-            MessageBox.Show("Decompress Success!");
-        }
-
-        void doCompress()
-        {
-            compressedDestinationPath = destinationPath + ".gz";
-            var bytes = File.ReadAllBytes(selectedFilePath);
-            using (FileStream fs = new FileStream(compressedDestinationPath, FileMode.CreateNew))
-            using (GZipStream zipStream = new GZipStream(fs, CompressionMode.Compress, false))
-            {
-                zipStream.Write(bytes, 0, bytes.Length);
-            }
-            MessageBox.Show("Compress Success!");
-        }
-
-        private void pictureBox7_MouseClick(object sender, MouseEventArgs e)
+        private void encryptFileButton_MouseClick(object sender, MouseEventArgs e)
         {
             if (File.Exists(selectedFilePath))
             {
-                //File.Encrypt(selectedFilePath);
-                Encrypt(selectedFilePath, encryptDestination);
+                EncryptClass encrypt = new EncryptClass();
+                encrypt.doCrypt(selectedFilePath, encryptDestination);
             }
         }
 
-        private void pictureBox8_MouseClick(object sender, MouseEventArgs e)
+        private void decryptFileButton_MouseClick(object sender, MouseEventArgs e)
         {
+            DecryptClass decrypt = new DecryptClass();
             if (File.Exists(selectedFilePath))
             {
                 if (!File.Exists(destinationPath))
-                    Decrypt(selectedFilePath, decryptDestination);
-                MessageBox.Show("Decrypt complete!");
+                    decrypt.doCrypt(selectedFilePath, decryptDestination);
             }
         }
 
-        private void pictureBox10_MouseClick(object sender, MouseEventArgs e)
+        private void makeFileReadOnlyButton_MouseClick(object sender, MouseEventArgs e)
         {
             if (File.Exists(selectedFilePath))
             {
@@ -196,7 +158,7 @@ namespace SanityArchiver
             }
         }
 
-        private void pictureBox11_MouseClick(object sender, MouseEventArgs e)
+        private void removeReadOnlyButton_MouseClick(object sender, MouseEventArgs e)
         {
             if (File.Exists(selectedFilePath))
             {
@@ -210,64 +172,109 @@ namespace SanityArchiver
             }
         }
 
-        private void Decrypt(string inputFilePath, string outputfilePath)
+        private void fileCopyButton_MouseEnter(object sender, EventArgs e)
         {
-            string EncryptionKey = "MAKV2SPBNI99212";
-            using (Aes encryptor = Aes.Create())
-            {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey,
-                    new byte[] {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76});
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (FileStream fsInput = new FileStream(inputFilePath, FileMode.Open))
-                {
-                    using (CryptoStream cs =
-                        new CryptoStream(fsInput, encryptor.CreateDecryptor(), CryptoStreamMode.Read))
-                    {
-                        using (FileStream fsOutput = new FileStream(outputfilePath, FileMode.Create))
-                        {
-                            int data;
-                            while ((data = cs.ReadByte()) != -1)
-                            {
-                                fsOutput.WriteByte((byte) data);
-                            }
-                        }
-                    }
-                }
-            }
+            label1.Visible = true;
         }
 
-        private void Encrypt(string inputFilePath, string outputfilePath)
+        private void fileCopyButton_MouseLeave(object sender, EventArgs e)
         {
-            string EncryptionKey = "MAKV2SPBNI99212";
-            using (Aes encryptor = Aes.Create())
-            {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey,
-                    new byte[] {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76});
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (FileStream fsOutput = new FileStream(outputfilePath, FileMode.Create))
-                {
-                    using (CryptoStream cs =
-                        new CryptoStream(fsOutput, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-                        using (FileStream fsInput = new FileStream(inputFilePath, FileMode.Open))
-                        {
-                            int data;
-                            while ((data = fsInput.ReadByte()) != -1)
-                            {
-                                cs.WriteByte((byte) data);
-                            }
-                        }
-                    }
-                }
-                MessageBox.Show("Encrypt complete");
-            }
+            label1.Visible = false;
         }
 
-
-        private void pictureBox6_MouseClick(object sender, MouseEventArgs e)
+        private void fileCompressButton_MouseEnter(object sender, EventArgs e)
         {
+            label2.Visible = true;
+        }
+
+        private void fileCompressButton_MouseLeave(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+        }
+
+        private void FileMoveButton_MouseEnter(object sender, EventArgs e)
+        {
+            label3.Visible = true;
+        }
+
+        private void fileMoveButton_MouseLeave(object sender, EventArgs e)
+        {
+            label3.Visible = false;
+        }
+
+        private void decompressFileButton_MouseEnter(object sender, EventArgs e)
+        {
+            label4.Visible = true;
+        }
+
+        private void decompressFileButton_MouseLeave(object sender, EventArgs e)
+        {
+            label4.Visible = false;
+        }
+
+        private void encryptFileButton_MouseEnter(object sender, EventArgs e)
+        {
+            label5.Visible = true;
+        }
+
+        private void encryptFileButton_MouseLeave(object sender, EventArgs e)
+        {
+            label5.Visible = false;
+        }
+
+        private void decryptFileButton_MouseEnter(object sender, EventArgs e)
+        {
+            label6.Visible = true;
+        }
+
+        private void decryptFileButton_MouseLeave(object sender, EventArgs e)
+        {
+            label6.Visible = false;
+        }
+
+        private void openFileButton_MouseEnter(object sender, EventArgs e)
+        {
+            label9.Visible = true;
+        }
+
+        private void openFileButton_MouseLeave(object sender, EventArgs e)
+        {
+            label9.Visible = false;
+        }
+
+        private void makeFileReadOnlyButton_MouseEnter(object sender, EventArgs e)
+        {
+            label7.Visible = true;
+        }
+
+        private void makeFileReadOnlyButton_MouseLeave(object sender, EventArgs e)
+        {
+            label7.Visible = false;
+        }
+
+        private void removeReadOnlyButton_MouseEnter(object sender, EventArgs e)
+        {
+            label8.Visible = true;
+        }
+
+        private void removeReadOnlyButton_MouseLeave(object sender, EventArgs e)
+        {
+            label8.Visible = false;
+        }
+
+        private void deleteFileButton_MouseEnter(object sender, EventArgs e)
+        {
+            label10.Visible = true;
+        }
+
+        private void deleteFileButton_MouseLeave(object sender, EventArgs e)
+        {
+            label10.Visible = false;
+        }
+
+        private void decompressFileButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            DecompressClass decompress = new DecompressClass();
             if (destinationPath != null)
             {
                 var token = destinationPath.ToList();
@@ -279,11 +286,11 @@ namespace SanityArchiver
                 if (!File.Exists(decompressedDestination))
                     if (textBox1.Text != "Plase select the file u'd like to work with !" &&
                         textBox2.Text != "Please select the destination folder if needed !")
-                        doDecompress();
+                        decompress.doCompression(selectedFilePath, decompressedDestination);
                     else
                     {
                         File.Delete(decompressedDestination);
-                        doDecompress();
+                        decompress.doCompression(selectedFilePath, decompressedDestination);
                     }
             }
         }
@@ -297,9 +304,10 @@ namespace SanityArchiver
         {
             textBox1.Text = "Plase select the file u'd like to work with !";
             textBox2.Text = "Please select the destination folder if needed !";
+            directoryInfo();
         }
 
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        private void sourceFileBrowserButton_MouseClick(object sender, MouseEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             DialogResult dr = ofd.ShowDialog();
@@ -311,6 +319,9 @@ namespace SanityArchiver
                 this.selectedFilePath = selectedFilePath;
                 this.selectedFileName = selectedFileName;
                 textBox1.Text = selectedFileName;
+                long lengthOfFile = new System.IO.FileInfo(selectedFilePath).Length;
+                textBox4.Text = (lengthOfFile / 1024 / 1024).ToString() + "MB (" + lengthOfFile / 1204 / 1024 / 1024 +
+                                "Gb) " + "Free space needed";
                 if (File.Exists(selectedFilePath))
                 {
                     pictureBox13.Visible = true;

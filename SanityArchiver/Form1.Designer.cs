@@ -31,32 +31,44 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.openFileButton = new System.Windows.Forms.PictureBox();
+            this.removeReadOnlyButton = new System.Windows.Forms.PictureBox();
+            this.makeFileReadOnlyButton = new System.Windows.Forms.PictureBox();
+            this.deleteFileButton = new System.Windows.Forms.PictureBox();
+            this.decryptFileButton = new System.Windows.Forms.PictureBox();
+            this.encryptFileButton = new System.Windows.Forms.PictureBox();
+            this.decompressFileButton = new System.Windows.Forms.PictureBox();
+            this.fileMoveButton = new System.Windows.Forms.PictureBox();
+            this.fileCompressButton = new System.Windows.Forms.PictureBox();
+            this.fileCopyButton = new System.Windows.Forms.PictureBox();
+            this.destinationPathBrowserButton = new System.Windows.Forms.PictureBox();
+            this.sourceFileBrowserButton = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.openFileButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.removeReadOnlyButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.makeFileReadOnlyButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteFileButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.decryptFileButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.encryptFileButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.decompressFileButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileMoveButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileCompressButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileCopyButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.destinationPathBrowserButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sourceFileBrowserButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,125 +96,146 @@
             this.pictureBox13.TabStop = false;
             this.pictureBox13.Visible = false;
             // 
-            // pictureBox12
+            // openFileButton
             // 
-            this.pictureBox12.Image = global::SanityArchiver.Properties.Resources.open_green_folder_icon;
-            this.pictureBox12.Location = new System.Drawing.Point(1036, 326);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(132, 134);
-            this.pictureBox12.TabIndex = 18;
-            this.pictureBox12.TabStop = false;
-            this.pictureBox12.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox12_MouseClick);
+            this.openFileButton.Image = global::SanityArchiver.Properties.Resources.open_green_folder_icon;
+            this.openFileButton.Location = new System.Drawing.Point(1036, 326);
+            this.openFileButton.Name = "openFileButton";
+            this.openFileButton.Size = new System.Drawing.Size(132, 134);
+            this.openFileButton.TabIndex = 18;
+            this.openFileButton.TabStop = false;
+            this.openFileButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.openFileButton_MouseClick);
+            this.openFileButton.MouseEnter += new System.EventHandler(this.openFileButton_MouseEnter);
+            this.openFileButton.MouseLeave += new System.EventHandler(this.openFileButton_MouseLeave);
             // 
-            // pictureBox11
+            // removeReadOnlyButton
             // 
-            this.pictureBox11.Image = global::SanityArchiver.Properties.Resources._write_line_pencil_128;
-            this.pictureBox11.Location = new System.Drawing.Point(660, 520);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(132, 134);
-            this.pictureBox11.TabIndex = 17;
-            this.pictureBox11.TabStop = false;
-            this.pictureBox11.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox11_MouseClick);
+            this.removeReadOnlyButton.Image = global::SanityArchiver.Properties.Resources._write_line_pencil_128;
+            this.removeReadOnlyButton.Location = new System.Drawing.Point(660, 520);
+            this.removeReadOnlyButton.Name = "removeReadOnlyButton";
+            this.removeReadOnlyButton.Size = new System.Drawing.Size(132, 134);
+            this.removeReadOnlyButton.TabIndex = 17;
+            this.removeReadOnlyButton.TabStop = false;
+            this.removeReadOnlyButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.removeReadOnlyButton_MouseClick);
+            this.removeReadOnlyButton.MouseEnter += new System.EventHandler(this.removeReadOnlyButton_MouseEnter);
+            this.removeReadOnlyButton.MouseLeave += new System.EventHandler(this.removeReadOnlyButton_MouseLeave);
             // 
-            // pictureBox10
+            // makeFileReadOnlyButton
             // 
-            this.pictureBox10.Image = global::SanityArchiver.Properties.Resources.Read_Only_128;
-            this.pictureBox10.Location = new System.Drawing.Point(660, 326);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(132, 134);
-            this.pictureBox10.TabIndex = 16;
-            this.pictureBox10.TabStop = false;
-            this.pictureBox10.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox10_MouseClick);
+            this.makeFileReadOnlyButton.Image = global::SanityArchiver.Properties.Resources.Read_Only_128;
+            this.makeFileReadOnlyButton.Location = new System.Drawing.Point(660, 326);
+            this.makeFileReadOnlyButton.Name = "makeFileReadOnlyButton";
+            this.makeFileReadOnlyButton.Size = new System.Drawing.Size(132, 134);
+            this.makeFileReadOnlyButton.TabIndex = 16;
+            this.makeFileReadOnlyButton.TabStop = false;
+            this.makeFileReadOnlyButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.makeFileReadOnlyButton_MouseClick);
+            this.makeFileReadOnlyButton.MouseEnter += new System.EventHandler(this.makeFileReadOnlyButton_MouseEnter);
+            this.makeFileReadOnlyButton.MouseLeave += new System.EventHandler(this.makeFileReadOnlyButton_MouseLeave);
             // 
-            // pictureBox9
+            // deleteFileButton
             // 
-            this.pictureBox9.Image = global::SanityArchiver.Properties.Resources.edit_delete_icon;
-            this.pictureBox9.Location = new System.Drawing.Point(1033, 520);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(132, 134);
-            this.pictureBox9.TabIndex = 15;
-            this.pictureBox9.TabStop = false;
-            this.pictureBox9.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox9_MouseClick);
+            this.deleteFileButton.Image = global::SanityArchiver.Properties.Resources.edit_delete_icon;
+            this.deleteFileButton.Location = new System.Drawing.Point(1033, 520);
+            this.deleteFileButton.Name = "deleteFileButton";
+            this.deleteFileButton.Size = new System.Drawing.Size(132, 134);
+            this.deleteFileButton.TabIndex = 15;
+            this.deleteFileButton.TabStop = false;
+            this.deleteFileButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.deleteFileButton_MouseClick);
+            this.deleteFileButton.MouseEnter += new System.EventHandler(this.deleteFileButton_MouseEnter);
+            this.deleteFileButton.MouseLeave += new System.EventHandler(this.deleteFileButton_MouseLeave);
+
             // 
-            // pictureBox8
+            // decryptFileButton
             // 
-            this.pictureBox8.Image = global::SanityArchiver.Properties.Resources._699371_icon_24_key_128;
-            this.pictureBox8.Location = new System.Drawing.Point(455, 520);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(132, 134);
-            this.pictureBox8.TabIndex = 14;
-            this.pictureBox8.TabStop = false;
-            this.pictureBox8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox8_MouseClick);
+            this.decryptFileButton.Image = global::SanityArchiver.Properties.Resources._699371_icon_24_key_128;
+            this.decryptFileButton.Location = new System.Drawing.Point(455, 520);
+            this.decryptFileButton.Name = "decryptFileButton";
+            this.decryptFileButton.Size = new System.Drawing.Size(132, 134);
+            this.decryptFileButton.TabIndex = 14;
+            this.decryptFileButton.TabStop = false;
+            this.decryptFileButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.decryptFileButton_MouseClick);
+            this.decryptFileButton.MouseEnter += new System.EventHandler(this.decryptFileButton_MouseEnter);
+            this.decryptFileButton.MouseLeave += new System.EventHandler(this.decryptFileButton_MouseLeave);
             // 
-            // pictureBox7
+            // encryptFileButton
             // 
-            this.pictureBox7.Image = global::SanityArchiver.Properties.Resources._643574_password_512x512;
-            this.pictureBox7.Location = new System.Drawing.Point(455, 326);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(132, 134);
-            this.pictureBox7.TabIndex = 13;
-            this.pictureBox7.TabStop = false;
-            this.pictureBox7.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox7_MouseClick);
+            this.encryptFileButton.Image = global::SanityArchiver.Properties.Resources._643574_password_512x512;
+            this.encryptFileButton.Location = new System.Drawing.Point(455, 326);
+            this.encryptFileButton.Name = "encryptFileButton";
+            this.encryptFileButton.Size = new System.Drawing.Size(132, 134);
+            this.encryptFileButton.TabIndex = 13;
+            this.encryptFileButton.TabStop = false;
+            this.encryptFileButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.encryptFileButton_MouseClick);
+            this.encryptFileButton.MouseEnter += new System.EventHandler(this.encryptFileButton_MouseEnter);
+            this.encryptFileButton.MouseLeave += new System.EventHandler(this.encryptFileButton_MouseLeave);
             // 
-            // pictureBox6
+            // decompressFileButton
             // 
-            this.pictureBox6.Image = global::SanityArchiver.Properties.Resources._5359290;
-            this.pictureBox6.Location = new System.Drawing.Point(238, 520);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(132, 134);
-            this.pictureBox6.TabIndex = 12;
-            this.pictureBox6.TabStop = false;
-            this.pictureBox6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox6_MouseClick);
+            this.decompressFileButton.Image = global::SanityArchiver.Properties.Resources._5359290;
+            this.decompressFileButton.Location = new System.Drawing.Point(238, 520);
+            this.decompressFileButton.Name = "decompressFileButton";
+            this.decompressFileButton.Size = new System.Drawing.Size(132, 134);
+            this.decompressFileButton.TabIndex = 12;
+            this.decompressFileButton.TabStop = false;
+            this.decompressFileButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.decompressFileButton_MouseClick);
+            this.decompressFileButton.MouseEnter += new System.EventHandler(this.decompressFileButton_MouseEnter);
+            this.decompressFileButton.MouseLeave += new System.EventHandler(this.decompressFileButton_MouseLeave);
             // 
-            // pictureBox5
+            // fileMoveButton
             // 
-            this.pictureBox5.Image = global::SanityArchiver.Properties.Resources.file_move_icone_8684_128;
-            this.pictureBox5.Location = new System.Drawing.Point(23, 520);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(132, 134);
-            this.pictureBox5.TabIndex = 11;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox5_MouseClick);
+            this.fileMoveButton.Image = global::SanityArchiver.Properties.Resources.file_move_icone_8684_128;
+            this.fileMoveButton.Location = new System.Drawing.Point(23, 520);
+            this.fileMoveButton.Name = "fileMoveButton";
+            this.fileMoveButton.Size = new System.Drawing.Size(132, 134);
+            this.fileMoveButton.TabIndex = 11;
+            this.fileMoveButton.TabStop = false;
+            this.fileMoveButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.fileMoveButton_MouseClick);
+            this.fileMoveButton.MouseEnter += new System.EventHandler(this.FileMoveButton_MouseEnter);
+            this.fileMoveButton.MouseLeave += new System.EventHandler(this.fileMoveButton_MouseLeave);
             // 
-            // pictureBox4
+            // fileCompressButton
             // 
-            this.pictureBox4.Image = global::SanityArchiver.Properties.Resources.zip_archieve_compressed_file_format_zip_iconcompressrar;
-            this.pictureBox4.Location = new System.Drawing.Point(238, 326);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(132, 134);
-            this.pictureBox4.TabIndex = 10;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox4_MouseClick);
+            this.fileCompressButton.Image = global::SanityArchiver.Properties.Resources.zip_archieve_compressed_file_format_zip_iconcompressrar;
+            this.fileCompressButton.Location = new System.Drawing.Point(238, 326);
+            this.fileCompressButton.Name = "fileCompressButton";
+            this.fileCompressButton.Size = new System.Drawing.Size(132, 134);
+            this.fileCompressButton.TabIndex = 10;
+            this.fileCompressButton.TabStop = false;
+            this.fileCompressButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.fileCompressButton_MouseClick);
+            this.fileCompressButton.MouseEnter += new System.EventHandler(this.fileCompressButton_MouseEnter);
+            this.fileCompressButton.MouseLeave += new System.EventHandler(this.fileCompressButton_MouseLeave);
             // 
-            // pictureBox3
+            // fileCopyButton
             // 
-            this.pictureBox3.Image = global::SanityArchiver.Properties.Resources.copy;
-            this.pictureBox3.Location = new System.Drawing.Point(23, 326);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(132, 134);
-            this.pictureBox3.TabIndex = 9;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseClick);
+            this.fileCopyButton.Image = global::SanityArchiver.Properties.Resources.copy;
+            this.fileCopyButton.Location = new System.Drawing.Point(23, 326);
+            this.fileCopyButton.Name = "fileCopyButton";
+            this.fileCopyButton.Size = new System.Drawing.Size(132, 134);
+            this.fileCopyButton.TabIndex = 9;
+            this.fileCopyButton.TabStop = false;
+            this.fileCopyButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.fileCopyButton_MouseClick);
+            this.fileCopyButton.MouseEnter += new System.EventHandler(this.fileCopyButton_MouseEnter);
+            this.fileCopyButton.MouseLeave += new System.EventHandler(this.fileCopyButton_MouseLeave);
             // 
-            // pictureBox2
+            // destinationPathBrowserButton
             // 
-            this.pictureBox2.Image = global::SanityArchiver.Properties.Resources.icon_astro;
-            this.pictureBox2.Location = new System.Drawing.Point(487, 109);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(44, 43);
-            this.pictureBox2.TabIndex = 8;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseClick);
+            this.destinationPathBrowserButton.Image = global::SanityArchiver.Properties.Resources.icon_astro;
+            this.destinationPathBrowserButton.Location = new System.Drawing.Point(487, 109);
+            this.destinationPathBrowserButton.Name = "destinationPathBrowserButton";
+            this.destinationPathBrowserButton.Size = new System.Drawing.Size(44, 43);
+            this.destinationPathBrowserButton.TabIndex = 8;
+            this.destinationPathBrowserButton.TabStop = false;
+            this.destinationPathBrowserButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.destinationPathBrowserButton_MouseClick);
             // 
-            // pictureBox1
+            // sourceFileBrowserButton
             // 
-            this.pictureBox1.Image = global::SanityArchiver.Properties.Resources.icon_astro;
-            this.pictureBox1.Location = new System.Drawing.Point(487, 60);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(44, 43);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            this.sourceFileBrowserButton.Image = global::SanityArchiver.Properties.Resources.icon_astro;
+            this.sourceFileBrowserButton.Location = new System.Drawing.Point(487, 60);
+            this.sourceFileBrowserButton.Name = "sourceFileBrowserButton";
+            this.sourceFileBrowserButton.Size = new System.Drawing.Size(44, 43);
+            this.sourceFileBrowserButton.TabIndex = 7;
+            this.sourceFileBrowserButton.TabStop = false;
+            this.sourceFileBrowserButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sourceFileBrowserButton_MouseClick);
             // 
             // pictureBox14
             // 
@@ -214,43 +247,170 @@
             this.pictureBox14.TabStop = false;
             this.pictureBox14.Visible = false;
             // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(617, 17);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(175, 32);
+            this.textBox3.TabIndex = 21;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(617, 118);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(222, 20);
+            this.textBox4.TabIndex = 22;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(65, 388);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "CopyFile";
+            this.label1.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(269, 388);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "CompressFile";
+            this.label2.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(80, 585);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "MoveFile";
+            this.label3.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(269, 585);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 13);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "DeCompressFile";
+            this.label4.Visible = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(484, 388);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 13);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "EncryptFile";
+            this.label5.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(484, 585);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(61, 13);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "UnCryptFile";
+            this.label6.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(698, 388);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(54, 13);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "ReadOnly";
+            this.label7.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(680, 585);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(94, 13);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "RemoveReadOnly";
+            this.label8.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(1073, 388);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 13);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "OpenFile";
+            this.label9.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(1063, 585);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(54, 13);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "DeleteFile";
+            this.label10.Visible = false;
+            // 
             // SanityArchiver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1188, 665);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.pictureBox13);
-            this.Controls.Add(this.pictureBox12);
-            this.Controls.Add(this.pictureBox11);
-            this.Controls.Add(this.pictureBox10);
-            this.Controls.Add(this.pictureBox9);
-            this.Controls.Add(this.pictureBox8);
-            this.Controls.Add(this.pictureBox7);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.openFileButton);
+            this.Controls.Add(this.removeReadOnlyButton);
+            this.Controls.Add(this.makeFileReadOnlyButton);
+            this.Controls.Add(this.deleteFileButton);
+            this.Controls.Add(this.decryptFileButton);
+            this.Controls.Add(this.encryptFileButton);
+            this.Controls.Add(this.decompressFileButton);
+            this.Controls.Add(this.fileMoveButton);
+            this.Controls.Add(this.fileCompressButton);
+            this.Controls.Add(this.fileCopyButton);
+            this.Controls.Add(this.destinationPathBrowserButton);
+            this.Controls.Add(this.sourceFileBrowserButton);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Name = "SanityArchiver";
             this.Text = "SanityArchiver";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.openFileButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.removeReadOnlyButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.makeFileReadOnlyButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deleteFileButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.decryptFileButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.encryptFileButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.decompressFileButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileMoveButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileCompressButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileCopyButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.destinationPathBrowserButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sourceFileBrowserButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -260,20 +420,32 @@
         #endregion
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.PictureBox sourceFileBrowserButton;
+        private System.Windows.Forms.PictureBox destinationPathBrowserButton;
+        private System.Windows.Forms.PictureBox fileCopyButton;
+        private System.Windows.Forms.PictureBox fileCompressButton;
+        private System.Windows.Forms.PictureBox fileMoveButton;
+        private System.Windows.Forms.PictureBox decompressFileButton;
+        private System.Windows.Forms.PictureBox encryptFileButton;
+        private System.Windows.Forms.PictureBox decryptFileButton;
+        private System.Windows.Forms.PictureBox deleteFileButton;
+        private System.Windows.Forms.PictureBox makeFileReadOnlyButton;
+        private System.Windows.Forms.PictureBox removeReadOnlyButton;
+        private System.Windows.Forms.PictureBox openFileButton;
         private System.Windows.Forms.PictureBox pictureBox13;
         private System.Windows.Forms.PictureBox pictureBox14;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
 
